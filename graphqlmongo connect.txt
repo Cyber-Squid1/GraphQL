@@ -1,0 +1,25 @@
+const { MongoClient } = require('mongodb');
+
+const uri = 'mongodb+srv://<username>:<password>@<cluster>/<database>?retryWrites=true&w=majority';
+const client = new MongoClient(uri);
+
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB!');
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+connectToDatabase();
+
+const resolvers = {
+  Query: {
+    async getUsers(parent, args, context, info) {
+      const db = client.db('<database>');
+      const users = await db.collection('users').find().toArray();
+      return users;
+    },
+  },
+};

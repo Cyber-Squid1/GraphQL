@@ -1,0 +1,15 @@
+# adding exclamination mark makes the field required i.e. it cannot have null value
+type Query {
+    orders: [Order]
+}
+
+type Order {
+    date: String!
+    subtotal: Float!
+    items: [OrderItem]
+}
+
+type OrderItem {
+    product: Product!
+    quantity: Int!
+}

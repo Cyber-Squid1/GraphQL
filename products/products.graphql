@@ -1,0 +1,26 @@
+# adding exclamination mark makes the field required i.e. it cannot have null value
+type Query {
+  products: [Product]
+  productsByPrice(min: Float!, max: Float!): [Product]
+  productsById(id: ID!): Product
+  productByName(Name: String!): Product
+}
+
+type Mutation {
+    addNewProduct(Name: String!, description: String!, price: Float!): Product
+    addNewProductReview(id: ID!, rating: Int!, comment: String): Review
+}
+
+type Product {
+  id: ID!
+  Name: String!
+  description: String!
+  review: [Review]
+  price: Float!
+}
+
+type Review {
+  # productId: ID!
+  rating: Int!
+  comment: String
+}
